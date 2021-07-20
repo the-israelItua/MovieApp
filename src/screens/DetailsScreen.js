@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useEffect} from 'react';
 import {
   StyleSheet,
   Text,
@@ -8,22 +8,26 @@ import {
   Pressable,
   SafeAreaView,
 } from 'react-native';
-import Category from '../components/Category';
-import EpisodeCard from '../components/EpisodeCard';
-import movie from '../../assets/data/movie';
 import MaterialIcons from 'react-native-vector-icons/MaterialIcons';
 import Entypo from 'react-native-vector-icons/Entypo';
 import AntDesign from 'react-native-vector-icons/AntDesign';
 import Feather from 'react-native-vector-icons/Feather';
 import Ionicons from 'react-native-vector-icons/Ionicons';
+import Category from '../components/Category';
+import VideoPlayer from '../components/VideoPlayer';
+import EpisodeCard from '../components/EpisodeCard';
+import movie from '../../assets/data/movie';
 
 const DetailsScreen = () => {
+  useEffect(() => {}, []);
+
   return (
     <SafeAreaView style={{flex: 1}}>
-      <Image
+      {/* <Image
         source={{uri: movie.seasons.items[0].episodes.items[0].poster}}
         style={styles.image}
-      />
+      /> */}
+      <VideoPlayer />
       <ScrollView>
         <View style={{padding: 12}}>
           <Text style={styles.title}>{movie.title}</Text>
