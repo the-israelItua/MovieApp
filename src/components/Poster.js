@@ -2,12 +2,12 @@ import React from 'react';
 import {Pressable, Text, Image, StyleSheet} from 'react-native';
 import {useNavigation} from '@react-navigation/native';
 
-const Poster = ({image}) => {
+const Poster = ({image, movieId}) => {
   const navigation = useNavigation();
 
   return (
     <Pressable
-      onPress={() => navigation.navigate('Details')}
+      onPress={() => navigation.navigate('Details', {movieId})}
       style={styles.container}>
       <Image
         style={styles.poster}

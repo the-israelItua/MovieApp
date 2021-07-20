@@ -2,16 +2,19 @@ import React from 'react';
 import {View, Text, SafeAreaView, StyleSheet, FlatList} from 'react-native';
 import Poster from './Poster';
 import categories from '../../assets/data/categories';
+import {IMAGE_URL} from '@env';
 
-const Category = ({category}) => {
+const Category = ({category, title}) => {
   return (
     <View style={styles.container}>
-      <Text style={styles.title}>{category.title}</Text>
+      <Text style={styles.title}>{title}</Text>
       <FlatList
         horizontal
         showsHorizontalScrollIndicator={false}
-        data={category.movies}
-        renderItem={({item}) => <Poster image={item.poster} />}
+        data={category}
+        renderItem={({item}) => (
+          <Poster image={`${IMAGE_URL}${item.poster_path}`} movieId={item.id} />
+        )}
       />
     </View>
   );
