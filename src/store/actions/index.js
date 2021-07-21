@@ -24,7 +24,10 @@ export const fetchAdventureMovies = () => async dispatch => {
     const result = await Axios.get(
       `${API_URL}/3/discover/movie?api_key=${API_KEY}&with_genres=12`,
     );
-    console.log(result);
+    dispatch({
+      type: types.FETCH_ADVENTURE_MOVIES,
+      payload: result.data.results,
+    });
   } catch (err) {
     console.log(err);
   }
@@ -35,7 +38,10 @@ export const fetchSciFiMovies = () => async dispatch => {
     const result = await Axios.get(
       `${API_URL}/3/discover/movie?api_key=${API_KEY}&with_genres=878`,
     );
-    console.log(result);
+    dispatch({
+      type: types.FETCH_SCIFI_MOVIES,
+      payload: result.data.results,
+    });
   } catch (err) {
     console.log(err);
   }
@@ -46,7 +52,10 @@ export const fetchAnimationMovies = () => async dispatch => {
     const result = await Axios.get(
       `${API_URL}/3/discover/movie?api_key=${API_KEY}&with_genres=16`,
     );
-    console.log(result);
+    dispatch({
+      type: types.FETCH_ANIMATION_MOVIES,
+      payload: result.data.results,
+    });
   } catch (err) {
     console.log(err);
   }
@@ -57,7 +66,10 @@ export const fetchDocumentaryMovies = () => async dispatch => {
     const result = await Axios.get(
       `${API_URL}/3/discover/movie?api_key=${API_KEY}&with_genres=99`,
     );
-    console.log(result);
+    dispatch({
+      type: types.FETCH_DOCUMENTARY_MOVIES,
+      payload: result.data.results,
+    });
   } catch (err) {
     console.log(err);
   }

@@ -1,22 +1,24 @@
 import React, {useEffect} from 'react';
-import {SafeAreaView, FlatList} from 'react-native';
-import {useDispatch, useSelector} from 'react-redux';
+import {SafeAreaView, ScrollView} from 'react-native';
+import {useSelector} from 'react-redux';
 import {fetchActionMovies} from '../store/actions';
 import Category from '../components/Category';
 import categories from '../../assets/data/categories';
 
 const HomeScreen = () => {
-  const dispatch = useDispatch();
-
-  const {action} = useSelector(state => state.movies);
+  const {action, adventure, scifi, documentary, animation} = useSelector(
+    state => state.movies,
+  );
 
   return (
     <SafeAreaView>
-      {/* <FlatList
-        data={categories.items}
-        renderItem={({item}) => <Category category={item} />}
-      /> */}
-      <Category category={action} title="Action" />
+      <ScrollView>
+        <Category category={adventure} title="Adventure Movies" />
+        <Category category={action} title="Action Movies" />
+        <Category category={scifi} title="Science Fictions" />
+        <Category category={animation} title="Animation Movies" />
+        <Category category={documentary} title="Documentaries" />
+      </ScrollView>
     </SafeAreaView>
   );
 };

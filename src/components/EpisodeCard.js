@@ -2,7 +2,7 @@ import React from 'react';
 import {View, Text, Image, StyleSheet} from 'react-native';
 import AntDesign from 'react-native-vector-icons/AntDesign';
 
-const EpisodeCard = ({episode}) => {
+const EpisodeCard = ({episode, hidePlot}) => {
   return (
     <View style={styles.container}>
       <View>
@@ -14,7 +14,7 @@ const EpisodeCard = ({episode}) => {
           </View>
           <AntDesign name="download" size={24} />
         </View>
-        <Text style={styles.plot}>{episode.plot}</Text>
+        {!hidePlot && <Text style={styles.plot}>{episode.plot}</Text>}
       </View>
     </View>
   );

@@ -1,9 +1,10 @@
 import React from 'react';
 import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
-import HomeStack from './homeStack';
 import AntDesign from 'react-native-vector-icons/AntDesign';
 import MaterialIcons from 'react-native-vector-icons/MaterialIcons';
 import Ionicons from 'react-native-vector-icons/Ionicons';
+import HomeStack from './homeStack';
+import SearchScreen from '../screens/SearchScreen';
 
 const Tab = createBottomTabNavigator();
 
@@ -36,7 +37,7 @@ const TabNavigation = () => {
       />
       <Tab.Screen
         name="Search"
-        component={HomeStack}
+        component={SearchScreen}
         options={{
           tabBarLabel: 'Search',
           tabBarIcon: ({color, size}) => (
