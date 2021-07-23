@@ -62,7 +62,7 @@ const DetailsScreen = () => {
         </View>
       ) : (
         <>
-          <VideoPlayer videoId={details.videos?.results[0].key} />
+          <VideoPlayer videoId={details?.videos?.results[0]?.key} />
           <ScrollView>
             <View style={{padding: 12}}>
               <Text style={styles.title}>{details.title}</Text>

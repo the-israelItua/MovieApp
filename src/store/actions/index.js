@@ -89,5 +89,23 @@ export const fetchSelectedMovie = (id, onSuccess) => async dispatch => {
     dispatch({
       type: types.FETCH_DETAILS_ERROR,
     });
+    console.log(err.message);
   }
 };
+
+export const searchForMovie =
+  (keyword, onSuccess = () => {}) =>
+  async dispatch => {
+    try {
+      const result = await Axios.get(
+        `${API_URL}/3/search/keyword?api_key=${API_KEY}&query=${keyword}&page=1`,
+      );
+      dispatch({
+        type: types.SEARCH_MOVIE,
+        payload: result.data.results,
+      });
+      return onSuccess();
+    } catch (err) {
+      console.log(err);
+    }
+  };

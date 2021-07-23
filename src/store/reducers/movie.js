@@ -7,6 +7,7 @@ const init_state = {
   scifi: [],
   documentary: [],
   selectedMovie: {},
+  searchedMovies: [],
   detailsFetchError: false,
 };
 
@@ -42,6 +43,11 @@ export const MovieReducer = (state = init_state, action) => {
         ...state,
         selectedMovie: action.payload,
         detailsFetchError: false,
+      };
+    case types.SEARCH_MOVIE:
+      return {
+        ...state,
+        searchedMovies: action.payload,
       };
     case types.FETCH_DETAILS_ERROR:
       return {

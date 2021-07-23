@@ -1,29 +1,35 @@
 import React from 'react';
-import {View, Text, Image, StyleSheet} from 'react-native';
+import {View, Text, Image, StyleSheet, Pressable} from 'react-native';
+import {useNavigation} from '@react-navigation/native';
 import AntDesign from 'react-native-vector-icons/AntDesign';
 
-const EpisodeCard = ({episode}) => {
+const SearchCard = ({searchItem}) => {
+  const navigation = useNavigation();
   return (
-    <View style={styles.container}>
+    <Pressable
+      style={styles.container}
+      onPress={() => navigation.navigate('Details', {movieId: searchItem.id})}>
       <View>
         <View style={styles.row}>
-          <Image style={styles.image} source={{uri: episode.poster}} />
+          <Image style={styles.image} source={{uri: searchItem.poster}} />
           <View style={styles.titleContainer}>
-            <Text style={styles.title}>{episode.title}</Text>
-            <Text style={styles.duration}>{episode.duration}</Text>
+            <Text style={styles.title}>{searchItem.name}</Text>
           </View>
           <AntDesign name="download" size={24} />
         </View>
-        <Text style={styles.plot}>{episode.plot}</Text>
       </View>
-    </View>
+    </Pressable>
   );
 };
 
 const styles = StyleSheet.create({
   container: {
     marginHorizontal: 10,
-    marginBottom: 8,
+    marginVertical: 7,
+    backgroundColor: '#fff',
+    borderRadius: 4,
+    paddingRight: 8,
+    height: 110,
   },
   row: {
     flexDirection: 'row',
@@ -31,8 +37,8 @@ const styles = StyleSheet.create({
     justifyContent: 'space-between',
   },
   image: {
-    height: 75,
-    aspectRatio: 16 / 9,
+    height: '100%',
+    aspectRatio: 12 / 9,
     resizeMode: 'cover',
     borderRadius: 3,
   },
@@ -40,10 +46,7 @@ const styles = StyleSheet.create({
     flex: 1,
     padding: 5,
   },
-  title: {
-    //    color: 'darkgrey',
-    // fontSize: 18,
-  },
+  title: {},
   duration: {
     color: 'darkgrey',
     fontSize: 10,
@@ -54,4 +57,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default EpisodeCard;
+export default SearchCard;

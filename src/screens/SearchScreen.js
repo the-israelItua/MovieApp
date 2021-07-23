@@ -1,4 +1,4 @@
-import React, {useEffect, useState} from 'react';
+import React, {useEffect, useState, useRef} from 'react';
 import {
   SafeAreaView,
   ScrollView,
@@ -11,17 +11,24 @@ import {useDispatch, useSelector} from 'react-redux';
 import {useNavigation} from '@react-navigation/native';
 import AntDesign from 'react-native-vector-icons/AntDesign';
 import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
-import {fetchActionMovies} from '../store/actions';
-import EpisodeCard from '../components/EpisodeCard';
+import {searchForMovie} from '../store/actions';
+import SearchCard from '../components/SearchCard';
 import movie from '../../assets/data/movie';
 
 const SearchScreen = () => {
   const [searchTerm, setSearchTerm] = useState('');
+  const inputRef = useRef(null);
   const navigation = useNavigation();
   const dispatch = useDispatch();
 
+  useEffect(() => {
+    inputRef.current.focus();
+  }, []);
+
+  const searchedMovies = useSelector(state => state.movies.searchedMovies);
+
   const onSearch = () => {
-    setSearchTerm('');
+    dispatch(searchForMovie(searchTerm, () => setSearchTerm('')));
   };
 
   return (
@@ -41,9 +48,9 @@ const SearchScreen = () => {
             onChangeText={text => setSearchTerm(text)}
             returnKeyLabel="search"
             returnKeyType="search"
-            autoFocus={true}
             enablesReturnKeyAutomatically={true}
             onSubmitEditing={onSearch}
+            ref={inputRef}
           />
           {searchTerm.length > 0 && (
             <AntDesign
@@ -55,21 +62,24 @@ const SearchScreen = () => {
           )}
         </View>
       </SafeAreaView>
-      {/* <View style={styles.body}>
-        <MaterialCommunityIcons
-          name="movie-search-outline"
-          color="grey"
-          size={64}
-          onPress={() => setSearchTerm('')}
-        />
+      {searchedMovies.length === 0 ? (
+        <View style={styles.body}>
+          <MaterialCommunityIcons
+            name="movie-search-outline"
+            color="grey"
+            size={64}
+            onPress={() => setSearchTerm('')}
+          />
 
-        <Text style={styles.bodyText}>Search movie keyword</Text>
-      </View> */}
-      <ScrollView style={{marginTop: 46}}>
-        {movie.seasons.items[0].episodes.items.map(episode => (
-          <EpisodeCard episode={episode} key={episode.id} hidePlot />
-        ))}
-      </ScrollView>
+          <Text style={styles.bodyText}>Search movie keyword</Text>
+        </View>
+      ) : (
+        <ScrollView style={{marginTop: 10}}>
+          {searchedMovies.map(movie => (
+            <SearchCard searchItem={movie} key={movie.id} />
+          ))}
+        </ScrollView>
+      )}
     </View>
   );
 };
